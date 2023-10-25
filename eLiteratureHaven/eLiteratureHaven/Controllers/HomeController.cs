@@ -32,6 +32,12 @@ namespace eLiteratureHaven.Controllers
         {
             return View();
         }
+
+        public ActionResult Home()
+        {
+            return View();
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Login(users user)
@@ -42,10 +48,10 @@ namespace eLiteratureHaven.Controllers
                 var obj = db.users.Where(a => a.Username.Equals(user.Username) && a.Password.Equals(user.Password)).FirstOrDefault();
                 if (obj != null)
                 {
-                    Session["username"] = obj.Username.ToString();
-                    Session["role"] = obj.Role.ToString();
-                    Session["userID"] = obj.ID.ToString();
-                    return RedirectToAction("Index");
+                    Session["Username"] = obj.Username.ToString();
+                    Session["Role"] = obj.Role.ToString();
+                    Session["ID"] = obj.ID.ToString();
+                    return RedirectToAction("Home");
                 }
             }
             catch
