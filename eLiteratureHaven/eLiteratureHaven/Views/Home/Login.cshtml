@@ -1,0 +1,58 @@
+﻿@model eLiteratureHaven.Models.users
+@{ Layout = null;}
+
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+<title>Login</title>
+
+@using (Html.BeginForm("Login", "Home", FormMethod.Post))
+{
+    <body style="background-color: lightblue;">
+        <fieldset>
+
+
+            @Html.AntiForgeryToken()
+            @Html.Raw(TempData["msg"])
+            @Html.ValidationSummary(true)
+
+            <div style="left:50%; top:50%; transform: translate(-50%, -50%);box-shadow: 5px 10px #888888; border-radius: 25px; position:absolute; padding: 20px; background-color: white;">
+                <h3 style="text-align: center; margin: -5px">Login</h3>
+                <hr />
+                <table style="margin-left: auto; margin-right: auto;">
+                    <tr>
+                        <td>@Html.LabelFor(a => a.Username)</td>
+                        <td>@Html.TextBoxFor(a => a.Username)</td>
+                        <td>@Html.ValidationMessageFor(a => a.Username, "", new { @class = "text-danger" })</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.LabelFor(a => a.Password)
+                        </td>
+                        <td>
+                            @Html.PasswordFor(a => a.Password)
+                        </td>
+                        <td>
+                            @Html.ValidationMessageFor(a => a.Password, "", new { @class = "text-danger" })
+                        </td>
+                    </tr>
+                    <tr></tr>
+                    <tr>
+                        <td></td>
+                        <td style="padding-top : 20px">
+                            <input type="submit" value="Login" />
+                            <a href="@Url.Action("Register", "Home")" class="elements">
+                                <span>Register</span>
+                            </a>
+                        </td>
+                        <td></td>
+                        <td></td>
+
+                    </tr>
+
+                </table>
+            </div>
+        </fieldset>
+    </body>
+}
