@@ -22,3 +22,41 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.grid-container {
+    display: grid;
+    grid-template: 400px 400px / 400px 400px 400px 400px;
+    justify-content:space-evenly;
+    grid-gap: 10px;
+    padding: 10px;
+    }
+
+.grid-container > div {
+    background-color: rgb(128, 128, 128);
+    text-align: center;
+    padding: 20px 0;
+    font-size: 30px;
+    }
+
+.search-box {
+    width: auto;
+    height: 25px;
+    border: 6px solid grey;
+    padding: 20px;
+    margin: 100px;
+}
+
+.detail-grid-container{
+    display:grid;
+    grid-template: 750px / 500px 500px;
+    grid-gap: 0px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    justify-content:;
+}
+
+.detail-grid-container > div {
+    text-align: left;
+    padding: 0px 0;
+    font-size: 20px;
+}
