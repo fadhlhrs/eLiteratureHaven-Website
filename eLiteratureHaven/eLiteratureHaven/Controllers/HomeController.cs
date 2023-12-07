@@ -88,5 +88,13 @@ namespace eLiteratureHaven.Controllers
             }
             return View();
         }*/
+        public ActionResult Category()
+        {
+            return View();
+        }
+        public ActionResult User_page()
+        {
+            return View();
+        }
     }
 }

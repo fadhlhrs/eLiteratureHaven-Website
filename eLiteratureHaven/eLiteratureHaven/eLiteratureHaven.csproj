@@ -157,7 +157,6 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\BookController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -211,7 +210,16 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Home\Home.cshtml" />
-    <Content Include="Views\Book\Book_details.cshtml" />
+    <Content Include="Views\Home\Book_details.cshtml" />
+    <Content Include="Views\Admin\Admin_home.cshtml" />
+    <Content Include="Views\Home\Category.cshtml" />
+    <Content Include="Views\Home\User_page.cshtml" />
+    <Content Include="Views\Admin\Add_book.cshtml" />
+    <Content Include="Views\Admin\Edit_book.cshtml" />
+    <Content Include="Views\Admin\Admin_home_category.cshtml" />
+    <Content Include="Views\Admin\Admin_home_users.cshtml" />
+    <Content Include="Views\Admin\Add_user.cshtml" />
+    <Content Include="Views\Admin\Edit_user.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

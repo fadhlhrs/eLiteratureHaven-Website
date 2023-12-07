@@ -60,3 +60,20 @@ textarea {
     padding: 0px 0;
     font-size: 20px;
 }
+
+.user-grid-container{
+    display:grid;
+    grid-template: 750px / 100px 300px 300px;
+    grid-gap: 0px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    justify-content:center;
+    margin:20px;
+}
+
+    .user-grid-container > div {
+        background-color: rgb(128, 128, 128);
+        text-align: left;
+        padding: 20px;
+        font-size: 20px;
+    }
