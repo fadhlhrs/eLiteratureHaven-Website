@@ -1,16 +1,20 @@
 ﻿@{ViewBag.Title = "Home Page";}
 
+<link href="~/Content/Site.css" rel="stylesheet" type="text/css" media="screen" runat="server" />
 <title>Home</title>
 
+
 <h1 style="text-align:center; margin-top:50px;">Welcome to eLiteratureHaven, user</h1>
+
+<h4 style="text-align:center; margin-top:50px;">Search a book</h4>
 <div>
-    <input class="search-box" type="text"></input>
+    <input class="home-search-box" type="text" size="500" value="Search"></input>
 </div>
 
 <h2 style="text-align:center;margin-bottom:40px">Featured Books</h2>
 
 <div class="grid-container">
-    <div class="item1">1</div>
+    <div class="item1" style="font-size:24px; padding: 5px"><img src="~/Content/Cover_images/Cover_Harry Potter and the Philosopher's Stone.jpg" style="max-width:100%;max-height:70%;" /><br /> Harry Potter and the Philosopher's Stone</div>
     <div class="item2">2</div>
     <div class="item3">3</div>
     <div class="item4">4</div>
