@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data;
+using System.Data.Entity;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity.Validation;
 using eLiteratureHaven.Models;
 
 namespace eLiteratureHaven.Controllers
@@ -42,21 +45,16 @@ namespace eLiteratureHaven.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(users user)
         {
-
-            try
-            {
-                var obj = db.users.Where(a => a.Username.Equals(user.Username) && a.Password.Equals(user.Password)).FirstOrDefault();
+                var obj = db.users.Where(a => a.username.Equals(user.username) && a.password.Equals(user.password)).FirstOrDefault();
                 if (obj != null)
                 {
-                    Session["Username"] = obj.Username.ToString();
-                    Session["Role"] = obj.Role.ToString();
-                    Session["ID"] = obj.ID.ToString();
+                    Session["username"] = obj.username.ToString();
+                    Session["role"] = obj.role.ToString();
+                    Session["id"] = obj.id.ToString();
                     return RedirectToAction("Home");
                 }
-            }
-            catch
-            {
-            }
+                else
+
             TempData["msg"] = "<script>alert('Username or Password is incorrect');</script>";
 
             return View(user);
@@ -66,28 +64,7 @@ namespace eLiteratureHaven.Controllers
         {
             return View(/*"Register"*/);
         }
-        /*[HttpPost]
-        public ActionResult Register(users user)
-        {
-            if (ModelState.IsValid)
-            {
-
-                var obj = db.users.Where(a => a.Username.Equals(user.Username)).FirstOrDefault();
-                if (obj != null)
-                {
-                    TempData["msg"] = "<script>alert('Username already taken');</script>";
-                }
-                else
-                {
-                    user.Role = "member";
-                    db.users.Add(user);
-                    db.SaveChanges();
-                    TempData["msg"] = "<script>alert('Registration success!');</script>";
-                }
-
-            }
-            return View();
-        }*/
+        
         public ActionResult Category()
         {
             return View();
@@ -110,6 +87,28 @@ namespace eLiteratureHaven.Controllers
         }
         public ActionResult Payment()
         {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Register(users user)
+        {
+            if (ModelState.IsValid)
+            {
+
+                var obj = db.users.Where(a => a.username.Equals(user.username)).FirstOrDefault();
+                if (obj != null)
+                {
+                    TempData["msg"] = "<script>alert('Username already taken');</script>";
+                }
+                else
+                {
+                    user.role = "member";
+                    db.users.Add(user);
+                    db.SaveChanges();
+                    TempData["msg"] = "<script>alert('Registration success!');</script>";
+                }
+
+            }
             return View();
         }
     }

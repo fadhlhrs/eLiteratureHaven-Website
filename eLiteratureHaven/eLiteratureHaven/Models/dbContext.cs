@@ -7,7 +7,7 @@ using System.Data.Entity;
 
 namespace eLiteratureHaven.Models
 {
-    public class dbContext
+    public class dbContext : DbContext
     {
         public DbSet<users> users { get; set; }
     }

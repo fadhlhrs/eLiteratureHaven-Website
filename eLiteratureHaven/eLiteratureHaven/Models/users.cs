@@ -11,7 +11,7 @@ namespace eLiteratureHaven.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
-        public int ID { get; set; }
+        public int id { get; set; }
 
         [Display(Name = "Username")]
         [Required(ErrorMessage = " • Username is required.")]
@@ -35,8 +35,9 @@ namespace eLiteratureHaven.Models
         [Display(Name = "Full Name")]
         public string full_name { get; set; }
 
-        [Display(Name = "Date of birth")]
-        public DateTime date_of_birth { get; set; }
+        [Display(Name = "18+?")]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int above_eighteen { get; set; }
 
         [Display(Name = "Phone Number (optional)")]
         public string phone_number { get; set; }
