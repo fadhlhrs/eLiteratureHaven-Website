@@ -96,5 +96,21 @@ namespace eLiteratureHaven.Controllers
         {
             return View();
         }
+        public ActionResult Book_details()
+        {
+            return View();
+        }
+        public ActionResult Search_result()
+        {
+            return View();
+        }
+        public ActionResult Category_result()
+        {
+            return View();
+        }
+        public ActionResult Payment()
+        {
+            return View();
+        }
     }
 }

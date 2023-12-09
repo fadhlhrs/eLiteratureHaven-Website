@@ -16,7 +16,31 @@ namespace eLiteratureHaven.Controllers
             return View();
         }
         
-        public ActionResult Admin_home()
+        public ActionResult Admin_books()
+        {
+            return View();
+        }
+        public ActionResult Admin_categories()
+        {
+            return View();
+        }
+        public ActionResult Admin_users()
+        {
+            return View();
+        }
+        public ActionResult Add_book()
+        {
+            return View();
+        }
+        public ActionResult Edit_book()
+        {
+            return View();
+        }
+        public ActionResult Add_user()
+        {
+            return View();
+        }
+        public ActionResult Edit_user()
         {
             return View();
         }
