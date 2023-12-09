@@ -212,19 +212,23 @@
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Home\Home.cshtml" />
     <Content Include="Views\Home\Book_details.cshtml" />
-    <Content Include="Views\Admin\Admin_home.cshtml" />
+    <Content Include="Views\Admin\Admin_books.cshtml" />
     <Content Include="Views\Home\Category.cshtml" />
     <Content Include="Views\Home\User_page.cshtml" />
     <Content Include="Views\Admin\Add_book.cshtml" />
     <Content Include="Views\Admin\Edit_book.cshtml" />
-    <Content Include="Views\Admin\Admin_home_category.cshtml" />
-    <Content Include="Views\Admin\Admin_home_users.cshtml" />
+    <Content Include="Views\Admin\Admin_categories.cshtml" />
+    <Content Include="Views\Admin\Admin_users.cshtml" />
     <Content Include="Views\Admin\Add_user.cshtml" />
     <Content Include="Views\Admin\Edit_user.cshtml" />
+    <Content Include="Views\Home\Search_result.cshtml" />
+    <Content Include="Views\Home\Category_result.cshtml" />
+    <Content Include="Views\Home\Payment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Cover_images\" />
+    <Folder Include="Content\PDF\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
