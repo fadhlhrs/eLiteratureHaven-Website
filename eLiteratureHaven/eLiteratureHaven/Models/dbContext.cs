@@ -10,5 +10,6 @@ namespace eLiteratureHaven.Models
     public class dbContext : DbContext
     {
         public DbSet<users> users { get; set; }
+        public DbSet<books> books { get; set; }
     }
 }
