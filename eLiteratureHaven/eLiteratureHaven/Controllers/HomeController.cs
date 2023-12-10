@@ -38,7 +38,29 @@ namespace eLiteratureHaven.Controllers
 
         public ActionResult Home()
         {
-            return View();
+            var booksList = new List<books>();
+
+            // Create instances of different books and add them to the list
+            var book1 = new books
+            {
+                id = 1,
+                title = "Harry Potter and the Sorcerers Stone",
+                image_path = "Cover_Harry Potter and the Sorcerers Stone.jpg"
+            };
+            booksList.Add(book1);
+
+            var book2 = new books
+            {
+                id = 2,
+                title = "No Logo",
+                image_path = "Cover_No Logo.jpg"
+            };
+            booksList.Add(book2);
+
+            // Add more books as needed...
+
+            // Pass the list of books to the view
+            return View(booksList);
         }
 
         [HttpPost]
@@ -62,11 +84,23 @@ namespace eLiteratureHaven.Controllers
 
         public ActionResult Register()
         {
-            return View(/*"Register"*/);
+            return View();
         }
         
-        public ActionResult Category()
+        [HttpGet]
+        public ActionResult Category(string selectedCategory, string selectedGenres)
         {
+            string[] selectedItems = Request.Form.GetValues("selectedItems");
+
+
+            if (selectedGenres != null && selectedGenres.Any())
+            {
+                string selectedGenresString = string.Join(", ", selectedGenres);
+
+                var result = db.books.SqlQuery($"SELECT * FROM books WHERE Genres LIKE '%{selectedGenresString}%'").ToList();
+                return View(result);
+            }
+
             return View();
         }
         public ActionResult User_page()
