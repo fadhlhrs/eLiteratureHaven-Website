@@ -25,9 +25,11 @@
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
 
                     <!--admin only-->
-                    <li>@Html.ActionLink("Books", "Admin_books", "Admin")</li>
-                    <li>@Html.ActionLink("Categories", "Admin_categories", "Admin")</li>
-                    <li>@Html.ActionLink("Users", "Admin_users", "Admin")</li>
+                    @if (Session["role"].ToString() == "admin")
+                    {
+                    <li>@Html.ActionLink("Book List", "Admin_books", "Admin")</li>
+                    <li>@Html.ActionLink("Account List", "Admin_users", "Admin")</li>
+                    }
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
