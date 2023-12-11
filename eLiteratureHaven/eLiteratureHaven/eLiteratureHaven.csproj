@@ -265,13 +265,13 @@
     <Content Include="Views\Home\User_page.cshtml" />
     <Content Include="Views\Admin\Add_book.cshtml" />
     <Content Include="Views\Admin\Edit_book.cshtml" />
-    <Content Include="Views\Admin\Admin_categories.cshtml" />
     <Content Include="Views\Admin\Admin_users.cshtml" />
     <Content Include="Views\Admin\Add_user.cshtml" />
     <Content Include="Views\Admin\Edit_user.cshtml" />
     <Content Include="Views\Home\Search_result.cshtml" />
     <Content Include="Views\Home\Category_result.cshtml" />
     <Content Include="Views\Home\Payment.cshtml" />
+    <Content Include="Views\Admin\Admin_transactions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
