@@ -35,10 +35,6 @@ namespace eLiteratureHaven.Models
         [Display(Name = "Full Name")]
         public string full_name { get; set; }
 
-        [Display(Name = "18+?")]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int above_eighteen { get; set; }
-
         [Display(Name = "Phone Number (optional)")]
         public string phone_number { get; set; }
 
