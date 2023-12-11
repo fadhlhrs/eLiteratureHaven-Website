@@ -24,10 +24,13 @@ namespace eLiteratureHaven.Models
         public string author { get; set; }
 
         [Display(Name = "Publisher")]
-        public string Publisher { get; set; }
+        public string publisher { get; set; }
 
         [Display(Name = "Published Year")]
         public int publication_year { get; set; }
+
+        [Display(Name = "Description")]
+        public string description { get; set; }
 
         [Display(Name = "Category")]
         public string category { get; set; }
