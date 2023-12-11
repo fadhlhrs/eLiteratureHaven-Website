@@ -86,23 +86,41 @@ namespace eLiteratureHaven.Controllers
         {
             return View();
         }
-        
-        [HttpGet]
-        public ActionResult Category(string selectedCategory, string selectedGenres)
+
+        public ActionResult Category()
         {
-            string[] selectedItems = Request.Form.GetValues("selectedItems");
-
-
-            if (selectedGenres != null && selectedGenres.Any())
-            {
-                string selectedGenresString = string.Join(", ", selectedGenres);
-
-                var result = db.books.SqlQuery($"SELECT * FROM books WHERE Genres LIKE '%{selectedGenresString}%'").ToList();
-                return View(result);
-            }
-
             return View();
         }
+
+        [HttpPost]
+        public ActionResult Category(string selectedCategory, string selectedGenres)
+        {
+            string[] selectedItems1 = Request.Form.GetValues("selectedGenres");
+            string[] selectedItems2 = Request.Form.GetValues("selectedCategory");
+            if (selectedItems1 != null && selectedItems1.Any())
+            {
+                string selectedGenresString = string.Join("+", selectedItems1);
+                string selectedCategoryString = string.Join("+", selectedItems2);
+                return RedirectToAction("Category_result",new { genres = selectedGenresString, category = selectedCategoryString});
+            };
+            
+            return View();
+
+        }
+
+        
+        public ActionResult Category_result(string genres, string category)
+        {
+            var genresList = genres.Split('+').ToList();
+
+            var filteredBooks = db.books
+                .Where(book => book.category == category &&
+                    genresList.All(genre => book.genre.Contains(genre)))
+                .ToList();
+
+            return View("~/Views/Home/Category_result.cshtml", filteredBooks);
+        }
+
         public ActionResult User_page()
         {
             return View();
@@ -112,10 +130,6 @@ namespace eLiteratureHaven.Controllers
             return View();
         }
         public ActionResult Search_result()
-        {
-            return View();
-        }
-        public ActionResult Category_result()
         {
             return View();
         }

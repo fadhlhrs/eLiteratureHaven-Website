@@ -1,17 +1,38 @@
-﻿
-@{
-    Layout = null;
-}
+﻿@model IEnumerable<eLiteratureHaven.Models.books>
 
 <!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Category_result</title>
-</head>
-<body>
-    <div> 
-    </div>
-</body>
-</html>
+
+        <table class="table">
+            <tr>
+                <th>
+                    Book Cover
+                </th>
+                <th>
+                    Book Title
+                </th>
+                <th>
+                    Author
+                </th>
+                <th>
+                    Published Year
+                </th>
+                @foreach (var filteredBooks in Model)
+                {
+            <tr>
+                <td>
+                    <img src="/Content/Cover_images/@Url.Content(filteredBooks.image_path)" style="max-width:100%;max-height:70%;" />
+                </td>
+                <td>
+                    @filteredBooks.title
+                </td>
+                <td>
+                    @filteredBooks.author
+                </td>
+                <td>
+                    @filteredBooks.publication_year
+                </td>
+            </tr>
+                }
+        </table>
+

@@ -25,10 +25,13 @@
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
 
                     <!--admin only-->
-                    @if (Session["role"].ToString() == "admin")
+                    @if (Session["username"] != null)
                     {
-                    <li>@Html.ActionLink("Book List", "Admin_books", "Admin")</li>
-                    <li>@Html.ActionLink("Account List", "Admin_users", "Admin")</li>
+                        if (Session["role"].ToString() == "admin")
+                        {
+                        <li>@Html.ActionLink("Book List", "Admin_books", "Admin")</li>
+                        <li>@Html.ActionLink("Account List", "Admin_users", "Admin")</li>
+                        }
                     }
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -41,7 +44,7 @@
                                     <a>Your Books</a>
                                 </li>
                                 <li>
-                                    <a>Categories</a>
+                                    <a href="@Url.Action("Category", "Home")">Categories</a>
                                 </li>
                                 <li>
                                     <a>Cart</a>

@@ -1,8 +1,11 @@
 ﻿@{ViewBag.Title = "Categories";}
+@model IEnumerable<eLiteratureHaven.Models.books>
+
 
 <title>home</title>
 
-<form action="/HomeController/Category">
+@using (Html.BeginForm("Category", "Home", FormMethod.Post))
+{
     <div style="padding-top:20px">
         <label>Choose a category: </label>
         <select name="selectedCategory">
@@ -12,11 +15,11 @@
     </div>
     <label>Choose genre</label>
     <div>
-        <input type="checkbox" name="selectedGenres" value="Fantasy"/><label>Fantasy</label> <br />
-        <input type="checkbox" name="selectedGenres" value="Children"/><label>Children</label> <br />
-        <input type="checkbox" name="selectedGenres" value="Economics"/><label>Economics</label> <br />
-        <input type="checkbox" name="selectedGenres" value="Business"/><label>Business</label> <br />
-        <input type="checkbox" name="selectedGenres" value="Sociology"/><label>Sociology</label> <br />
+        <input type="checkbox" name="selectedGenres" value="Fantasy" /><label>Fantasy</label> <br />
+        <input type="checkbox" name="selectedGenres" value="Children" /><label>Children</label> <br />
+        <input type="checkbox" name="selectedGenres" value="Economics" /><label>Economics</label> <br />
+        <input type="checkbox" name="selectedGenres" value="Business" /><label>Business</label> <br />
+        <input type="checkbox" name="selectedGenres" value="Sociology" /><label>Sociology</label> <br />
     </div>
     <input type="submit" value="Search">
-</form>
+}
