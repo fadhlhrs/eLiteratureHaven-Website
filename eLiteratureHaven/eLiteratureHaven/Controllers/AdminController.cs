@@ -26,26 +26,35 @@ namespace eLiteratureHaven.Controllers
             return RedirectToAction("Login", "Home");
             
         }
-        public ActionResult Admin_categories()
-        {
-            return View();
-        }
+       
         public ActionResult Admin_users()
         {
+            if(Session["role"].ToString() == "admin")
+            {
+                return View(db.users.ToList());
+            }
+            return RedirectToAction("Login", "Home");
+        }
+        public ActionResult Admin_transactions()
+        {
             return View();
         }
+
         public ActionResult Add_book()
         {
             return View();
         }
+
         public ActionResult Edit_book()
         {
             return View();
         }
+
         public ActionResult Add_user()
         {
             return View();
         }
+
         public ActionResult Edit_user()
         {
             return View();
