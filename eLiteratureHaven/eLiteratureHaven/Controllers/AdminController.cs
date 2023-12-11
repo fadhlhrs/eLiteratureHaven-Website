@@ -10,6 +10,7 @@ namespace eLiteratureHaven.Controllers
 {
     public class AdminController : Controller
     {
+        private dbContext db = new dbContext();
         // GET: Admin
         public ActionResult Index()
         {
@@ -18,7 +19,12 @@ namespace eLiteratureHaven.Controllers
         
         public ActionResult Admin_books()
         {
-            return View();
+            if (Session["role"].ToString() == "admin")
+            {
+                return View(db.books.ToList());
+            }
+            return RedirectToAction("Login", "Home");
+            
         }
         public ActionResult Admin_categories()
         {

@@ -1,13 +1,76 @@
 ﻿@{ViewBag.Title = "Book list";}
+@model IEnumerable<eLiteratureHaven.Models.books>
 
-<link href="~/Content/Site.css" rel="stylesheet" type="text/css" media="screen" runat="server" />
-<title>Home</title>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.author)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.publication_year)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.publisher)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.category)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.genre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.image_path)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pdf_path)
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(model => item.id)
+        </td>
+        <td>
+            @Html.DisplayFor(model => item.title)
+        </td>
+        <td>
+            @Html.DisplayFor(model => item.author)
+        </td>
+        <td>
+            @Html.DisplayFor(model => item.publication_year)
+        </td>
+        <td>
+            @Html.DisplayFor(model => item.description)
+        </td>
+        <td>
+            @Html.DisplayFor(model => item.category)
+        </td>
+        <td>
+            @Html.DisplayFor(model => item.genre)
+        </td>
+        <td>
+            @Html.DisplayFor(model => item.image_path)
+        </td>
+        <td>
+            @Html.DisplayFor(model => item.pdf_path)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit_book", new { id = item.id }) |
+            @Html.ActionLink("Delete", "Delete_book", new { id = item.id })
+        </td>
 
-<div class="admin-grid">
-    <div class="item1">Book List</div>
-    <div class="item2">Search bar</div>
-    <div class="item3">Category List</div>
-    <div class="item4">Books...</div>
-    <div class="item5">User List</div>
-</div>
+    </tr>
+    }
+</table>
 
