@@ -64,6 +64,38 @@ namespace eLiteratureHaven.Controllers
         }
 
         [HttpPost]
+        public ActionResult Home(string home_search)
+        {
+            string[] searchTerms = Request.Form.GetValues("home_search");
+            if (searchTerms != null && searchTerms.Any())
+            {
+                string searchTermsString = string.Join("+", searchTerms);
+                return RedirectToAction("Search_result", new { searchTermsString});
+            };
+
+            return View();
+
+        }
+        public ActionResult Search_result(string searchTermsString)
+        {
+            if (searchTermsString != null)
+            {
+                var searchTerms = searchTermsString.Split('+').ToList();
+
+                var filteredBooks = db.books
+                    .Where(book => searchTerms.All(term =>
+                    book.title.Contains(term) ||
+                    book.author.Contains(term)
+                    ))
+                    .ToList();
+
+                return View("~/Views/Home/Search_result.cshtml", filteredBooks);
+            }
+            
+            return View();
+        }
+
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Login(users user)
         {
@@ -81,6 +113,8 @@ namespace eLiteratureHaven.Controllers
 
             return View(user);
         }
+
+
 
         public ActionResult Register()
         {
@@ -129,10 +163,7 @@ namespace eLiteratureHaven.Controllers
         {
             return View();
         }
-        public ActionResult Search_result()
-        {
-            return View();
-        }
+        
         public ActionResult Payment()
         {
             return View();

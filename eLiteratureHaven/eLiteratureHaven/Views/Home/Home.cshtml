@@ -10,12 +10,18 @@
 
 <h4 style="text-align:center; margin-top:50px;">Search a book</h4>
 <div>
-    <input class="home-search-box" type="text" size="500" value="Search"/>
+    @using (Html.BeginForm("Home", "Home", FormMethod.Post))
+
+    {
+        @Html.Raw(TempData["msg"])
+        <input class="home-search-box" type="text" size="500" name="home_search" placeholder="Enter a title or author" />
+    }
 </div>
 
 <h2 style="text-align:center;margin-bottom:40px">Featured Books</h2>
 
 <div class="grid-container">
+  
     @foreach (var book in Model)
     {
         <div style="font-size:24px; padding: 5px">
