@@ -7,11 +7,206 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title></title>
+    <title>Add Book</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        header {
+            background-color: #127;
+            color: white;
+            padding: 1em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 20px;
+        }
+
+        nav {
+            display: flex;
+        }
+
+            nav a {
+                color: white;
+                text-decoration: none;
+                margin: 0 10px;
+            }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px;
+        }
+
+        .sidebar {
+            width: 50px;
+        }
+
+        .main-content {
+            width: 100%;
+            padding: 20px;
+            background-color: #fff;
+        }
+
+        .text-box {
+            margin-bottom: 10px;
+            width: 100%;
+        }
+
+        .dropdown {
+            margin-bottom: 10px;
+            width: 100%;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            margin-bottom: 10px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 70px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    <div>
-    
+    <header>
+        <h1 class="logo">eLiteratureHaven <br> Admin Homepage</h1>
+        <nav>
+            <a href="#">Home</a> | <a href="#">User page</a>
+        </nav>
+    </header>
+    <div class="content">
+        <div class="sidebar">
+            <img src="your-image.jpg" alt="Book Cover" width="50px">
+        </div>
+
+        <div class="main-content">
+            <div class="text-box">
+                <label for="bookTitle">Enter Book Title:</label>
+                <input type="text" id="bookTitle" placeholder="Book Title">
+            </div>
+
+            <div class="text-box">
+                <label for="authorName">Enter Author Name:</label>
+                <input type="text" id="authorName" placeholder="Author Name">
+            </div>
+
+            <div class="text-box">
+                <label for="publisherName">Enter Publisher Name:</label>
+                <input type="text" id="publisherName" placeholder="Publisher Name">
+            </div>
+
+            <div class="dropdown">
+                <label for="publicationYear">Publication Year:</label>
+                <select id="publicationYear">
+                    <option value="" disabled selected>Year</option>
+                    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Mendapatkan elemen dropdown
+        var dropdown = document.getElementById("publicationYear");
+
+        // Mendapatkan tahun saat ini
+        var currentYear = new Date().getFullYear();
+
+        // Menambahkan opsi tahun ke dropdown
+        for (var year = currentYear; year >= currentYear - 20; year--) {
+            var option = document.createElement("option");
+            option.value = year;
+            option.text = year;
+            dropdown.add(option);
+        }
+    });
+                    </script>
+                </select>
+            </div>
+
+            <div class="dropdown">
+                <label for="chooseGenre">Choose Genre:</label>
+                <select id="chooseGenre">
+                    <option value="" disabled selected>Genre</option>
+                    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Mendapatkan elemen dropdown
+        var dropdown = document.getElementById("chooseGenre");
+
+        // Array genre (gantilah ini dengan genre yang sesuai)
+        var genres = ["Action", "Adventure", "Romance", "Science Fiction", "Mystery"];
+
+        // Menambahkan opsi genre ke dropdown
+        genres.forEach(function (genre) {
+            var option = document.createElement("option");
+            option.value = genre;
+            option.text = genre;
+            dropdown.add(option);
+        });
+    });
+                    </script>
+                </select>
+            </div>
+
+            <div class="dropdown">
+                <label for="chooseCategory">Choose Category:</label>
+                <select id="chooseCategory">
+                    <option value="" disabled selected>Category</option>
+                    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Mendapatkan elemen dropdown
+        var dropdown = document.getElementById("chooseCategory");
+
+        // Array kategori (gantilah ini dengan kategori yang sesuai)
+        var categories = ["Fiction", "Non-fiction", "Science Fiction", "Mystery", "Fantasy"];
+
+        // Menambahkan opsi kategori ke dropdown
+        categories.forEach(function (category) {
+            var option = document.createElement("option");
+            option.value = category;
+            option.text = category;
+            dropdown.add(option);
+        });
+    });
+                    </script>
+
+                </select>
+            </div>
+
+            <div class="text-box">
+                <label for="bookDescription">Book Description:</label>
+                <textarea id="bookDescription" placeholder="Enter Description"></textarea>
+            </div>
+
+            <div class="price">
+                <div class="text-box">
+                    <label for="rentalPrice">Rental Price:</label>
+                    <input type="text" id="rentalPrice" placeholder="Enter Rental Price">
+                </div>
+
+                <div>
+                    <label for="uploadFile">Upload Book File</label>
+                    <input type="file" id="uploadFile" accept=".pdf">
+                </div>
+            </div>
+        </div>
+        <button>+ Add Book</button>
     </div>
 </body>
 </html>
