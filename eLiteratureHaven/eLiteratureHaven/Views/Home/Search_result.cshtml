@@ -22,7 +22,14 @@
             {
             <tr>
                 <td>
-                    <img src="/Content/Cover_images/@Url.Content(filteredBooks.image_path)" style="max-height:80%;" />
+                    @if (!string.IsNullOrEmpty(filteredBooks.image_path))
+                    {
+                        <img src="@Url.Content("~/Content/Cover_images/" + filteredBooks.image_path)" style="max-height:200px;" />
+                    }
+                    else
+                    {
+                        <span>No Image</span>
+                    }
                 </td>
                 <td>
                     @filteredBooks.title
