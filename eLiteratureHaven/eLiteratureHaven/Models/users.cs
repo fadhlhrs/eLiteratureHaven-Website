@@ -29,13 +29,13 @@ namespace eLiteratureHaven.Models
         public string email { get; set; }
 
         [Display(Name = "Role")]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public string role { get; set; }
 
         [Display(Name = "Full Name")]
         public string full_name { get; set; }
 
-        [Display(Name = "Phone Number (optional)")]
+        [Display(Name = "Phone Number")]
         public string phone_number { get; set; }
 
         [NotMapped]
