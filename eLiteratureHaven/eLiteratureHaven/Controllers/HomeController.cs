@@ -156,11 +156,30 @@ namespace eLiteratureHaven.Controllers
 
         public ActionResult User_page()
         {
-            return View();
+            string sessionId = (string)Session["id"];
+            int id;
+
+            if (int.TryParse(sessionId, out id))
+            {
+                var user = db.users.FirstOrDefault(u => u.id == id);
+                if (user != null)
+                {
+                    return View(user);
+                }
+            }
+
+            return RedirectToAction("Home", "Home");
         }
-        public ActionResult Book_details()
+
+        public ActionResult Book_details(int id)
         {
-            return View();
+            var book = db.books.Find(id);
+            if (book == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(book);
         }
         
         public ActionResult Payment()
