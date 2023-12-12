@@ -5,6 +5,9 @@ using System.Web;
 using System.Web.Mvc;
 using System.IO;
 using eLiteratureHaven.Models;
+using System.Data;
+using System.Data.Entity;
+using System.Data.Entity.Validation;
 
 
 namespace eLiteratureHaven.Controllers
@@ -43,7 +46,39 @@ namespace eLiteratureHaven.Controllers
 
         public ActionResult Add_book()
         {
-            return View();
+            books model = new books();
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Add_book([Bind(Include = "id, title, author, publisher, publication_year, description, category, genre, image_path, pdf_path")] books book, HttpPostedFileBase imageFile, HttpPostedFileBase pdfFile)
+        {
+            if (ModelState.IsValid)
+            {
+                if (imageFile != null && imageFile.ContentLength > 0)
+                {
+                    var imageFileName = Path.GetFileName(imageFile.FileName);
+                    var imageFolderPath = Server.MapPath("~/Content/Cover_images");
+                    var imageFilePath = Path.Combine(imageFolderPath, imageFileName);
+                    imageFile.SaveAs(imageFilePath);
+                    book.image_path = imageFileName; // Store file name with extension
+                }
+
+                if (pdfFile != null && pdfFile.ContentLength > 0)
+                {
+                    var pdfFileName = Path.GetFileName(pdfFile.FileName);
+                    var pdfFileFolderPath = Server.MapPath("~/Content/PDF");
+                    var pdfFilePath = Path.Combine(pdfFileFolderPath, pdfFileName);
+                    pdfFile.SaveAs(pdfFilePath);
+                    book.pdf_path = pdfFileName; // Store only the file name
+                }
+
+                db.books.Add(book);
+                db.SaveChanges();
+                return RedirectToAction("Admin_books");
+            }
+            return View(book);
         }
 
         public ActionResult Edit_book(int id)
@@ -57,26 +92,27 @@ namespace eLiteratureHaven.Controllers
             return View(book);
         }
         [HttpPost]
-        public ActionResult Edit_book([Bind(Include = "id, title, author, publisher, publication year, description, category, genre, image_path, pdf_path")] books book, HttpPostedFileBase imageFile, HttpPostedFileBase pdfFile)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit_book([Bind(Include = "id, title, author, publisher, publication_year, description, category, genre, image_path, pdf_path")] books book, HttpPostedFileBase imageFile, HttpPostedFileBase pdfFile)
         {
             if (ModelState.IsValid)
             {
                 if (imageFile != null && imageFile.ContentLength > 0)
                 {
-                    var cover_image_name = Path.GetFileName(imageFile.FileName);
-                    var cover_image_folder_path = Server.MapPath("~/Content/Cover_images");
-                    var cover_image_path = Path.Combine(cover_image_folder_path, cover_image_name);
-                    imageFile.SaveAs(cover_image_path);
-                    book.image_path = cover_image_name;
+                    var imageFileName = Path.GetFileName(imageFile.FileName);
+                    var imageFolderPath = Server.MapPath("~/Content/Cover_images");
+                    var imageFilePath = Path.Combine(imageFolderPath, imageFileName);
+                    imageFile.SaveAs(imageFilePath);
+                    book.image_path = imageFileName; // Store file name with extension
                 }
 
                 if (pdfFile != null && pdfFile.ContentLength > 0)
                 {
                     var pdfFileName = Path.GetFileName(pdfFile.FileName);
-                    var pdfFolderPath = Server.MapPath("~/Content/Uploads/PDFs");
-                    var pdfFilePath = Path.Combine(pdfFolderPath, pdfFileName);
+                    var pdfFileFolderPath = Server.MapPath("~/Content/PDF");
+                    var pdfFilePath = Path.Combine(pdfFileFolderPath, pdfFileName);
                     pdfFile.SaveAs(pdfFilePath);
-                    book.pdf_path = pdfFileName; // Store only the file name
+                    book.pdf_path = pdfFileName; // Store file name with extension
                 }
 
                 db.Entry(book).State = System.Data.Entity.EntityState.Modified;
@@ -86,14 +122,30 @@ namespace eLiteratureHaven.Controllers
             return View(book);
         }
 
-        public ActionResult Add_user()
+        public ActionResult Delete_book(int id)
         {
+            books book = db.books.Find(id);
+            return View(book);
+        }
+
+        [HttpPost, ActionName("Delete_book")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            try
+            {
+                books book = db.books.Find(id);
+                db.books.Remove(book);
+                db.SaveChanges();
+                return RedirectToAction("Admin_books");
+            }
+            catch
+            {
+                TempData["msg"] = "<script>alert('Delete unsuccessful');</script>";
+            }
             return View();
         }
 
-        public ActionResult Edit_user()
-        {
-            return View();
-        }
+
     }
 }

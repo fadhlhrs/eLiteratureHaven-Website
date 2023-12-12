@@ -1,6 +1,13 @@
 ﻿@{ViewBag.Title = "Book list";}
 @model IEnumerable<eLiteratureHaven.Models.books>
 
+@using (Html.BeginForm("Add_book", "Admin"))
+{
+    @Html.AntiForgeryToken()
+    <input type="submit" class="btn btn-primary" value="Add a book" style="margin-top : 20px; margin-bottom : 20px" />
+}
+
+
 <table class="table">
     <tr>
         <th>
@@ -34,40 +41,40 @@
     </tr>
     @foreach (var item in Model)
     {
-    <tr>
-        <td>
-            @Html.DisplayFor(model => item.id)
-        </td>
-        <td>
-            @Html.DisplayFor(model => item.title)
-        </td>
-        <td>
-            @Html.DisplayFor(model => item.author)
-        </td>
-        <td>
-            @Html.DisplayFor(model => item.publication_year)
-        </td>
-        <td>
-            @Html.DisplayFor(model => item.publisher)
-        </td>
-        <td>
-            @Html.DisplayFor(model => item.category)
-        </td>
-        <td>
-            @Html.DisplayFor(model => item.genre)
-        </td>
-        <td>
-            @Html.DisplayFor(model => item.image_path)
-        </td>
-        <td>
-            @Html.DisplayFor(model => item.pdf_path)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit_book", new { id = item.id }) |
-            @Html.ActionLink("Delete", "Delete_book", new { id = item.id })
-        </td>
+        <tr>
+            <td>
+                @Html.DisplayFor(model => item.id)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.title)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.author)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.publication_year)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.publisher)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.category)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.genre)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.image_path)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.pdf_path)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit_book", new { id = item.id }) |
+                @Html.ActionLink("Delete", "Delete_book", new { id = item.id })
+            </td>
 
-    </tr>
+        </tr>
     }
 </table>
 
