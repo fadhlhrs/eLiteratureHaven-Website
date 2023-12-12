@@ -51,22 +51,18 @@ textarea {
 .detail-grid-container{
     display:grid;
     grid-template: 750px / 500px 500px;
-    grid-gap: 0px;
     padding-top: 40px;
     padding-bottom: 40px;
-    justify-content:;
 }
 
 .detail-grid-container > div {
     text-align: left;
-    padding: 0px 0;
     font-size: 20px;
 }
 
 .user-grid-container{
     display:grid;
     grid-template: 750px / 100px 300px 300px;
-    grid-gap: 0px;
     padding-top: 40px;
     padding-bottom: 40px;
     justify-content:center;
@@ -83,7 +79,6 @@ textarea {
 .admin-grid {
     display:grid;
     grid-template-columns: 300px 2fr;
-    grid-gap: 0px;
     padding-top: 40px;
     padding-bottom: 40px;
     justify-content:center;
