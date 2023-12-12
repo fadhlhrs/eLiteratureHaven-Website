@@ -96,7 +96,6 @@ namespace eLiteratureHaven.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Login(users user)
         {
                 var obj = db.users.Where(a => a.username.Equals(user.username) && a.password.Equals(user.password)).FirstOrDefault();
@@ -181,7 +180,7 @@ namespace eLiteratureHaven.Controllers
                 }
                 else
                 {
-                    user.role = "member";
+                    user.role = "customer";
                     db.users.Add(user);
                     db.SaveChanges();
                     TempData["msg"] = "<script>alert('Registration success!');</script>";
@@ -190,5 +189,14 @@ namespace eLiteratureHaven.Controllers
             }
             return View();
         }
+        public ActionResult Logout()
+        {
+            Session.Remove("username");
+            Session.Remove("role");
+            Session.Remove("id");
+
+            return RedirectToAction("login");
+        }
+
     }
 }
