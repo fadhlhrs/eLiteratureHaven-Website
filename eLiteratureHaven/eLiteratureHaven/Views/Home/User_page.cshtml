@@ -1,21 +1,22 @@
-﻿@{ViewBag.Title = "User Page";}
+﻿
+@model eLiteratureHaven.Models.users
+@{ViewBag.Title = "User Page";}
 
 <title>User Page</title>
 
 <link href="~/Content/Site.css" rel="stylesheet" type="text/css" media="screen" runat="server" />
 <div class="user-grid-container">
-    <div class="item1">Account Details<br />
-        Logout</div>
-    <div class="item2" style="padding-left:50px">
-        Username<br />
-        Date of Birth<br />
-        Phone Number<br />
-        Email
+    <div class="item1" style="padding-left:50px">
+        Username:<br />
+        Email:<br />
+        Full Name: <br />
+        Phone Number:
+
     </div>
-    <div class="item3" style="padding-right:50px">
-        <input type="text" style="line-height: 20px;"/><br />
-        <input type="text" style="line-height: 20px;"/><br />
-        <input type="text" style="line-height: 20px;"/><br />
-        Email
+    <div class="item2" style="padding-right:50px">
+        <input type="text" style="line-height: 20px;" value="@Model.username" /><br />
+        <input type="text" style="line-height: 20px;" value="@Model.email" /><br />
+        <input type="text" style="line-height: 20px;" value="@Model.full_name" /><br />
+        <input type="text" style="line-height: 20px;" value="@Model.phone_number" /><br />
     </div>
 </div>
