@@ -1,11 +1,6 @@
 ﻿@{ViewBag.Title = "Account list";}
 @model IEnumerable<eLiteratureHaven.Models.users>
 
-@using (Html.BeginForm("Add_user", "Admin"))
-{
-    @Html.AntiForgeryToken()
-    <input type="submit" class="btn btn-primary" value="Add a account" style="margin-top : 20px; margin-bottom : 20px" />
-}
 
 <table class="table">
     <tr>
@@ -48,9 +43,6 @@
             </td>
             <td>
                 @Html.DisplayFor(model => item.phone_number)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit_user", new { id = item.id })
             </td>
 
         </tr>
