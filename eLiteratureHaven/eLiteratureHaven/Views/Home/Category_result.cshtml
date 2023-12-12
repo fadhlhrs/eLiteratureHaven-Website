@@ -1,0 +1,44 @@
+﻿@model IEnumerable<eLiteratureHaven.Models.books>
+
+<!DOCTYPE html>
+
+@if (Model != null && Model.Any())
+{
+        <table class="table">
+            <tr>
+                <th>
+                    Book Cover
+                </th>
+                <th>
+                    Book Title
+                </th>
+                <th>
+                    Author
+                </th>
+                <th>
+                    Published Year
+                </th>
+                @foreach (var filteredBooks in Model)
+                {
+            <tr>
+                <td>
+                    <img src="/Content/Cover_images/@Url.Content(filteredBooks.image_path)" style="max-height:80%;" />
+                </td>
+                <td>
+                    @filteredBooks.title
+                </td>
+                <td>
+                    @filteredBooks.author
+                </td>
+                <td>
+                    @filteredBooks.publication_year
+                </td>
+            </tr>
+                }
+        </table>
+}
+else
+{ 
+    <h1>Book not found</h1>  
+}
+

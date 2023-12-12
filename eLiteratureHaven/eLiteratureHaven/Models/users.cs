@@ -11,37 +11,32 @@ namespace eLiteratureHaven.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
-        public int ID { get; set; }
+        public int id { get; set; }
 
         [Display(Name = "Username")]
         [Required(ErrorMessage = " • Username is required.")]
         [StringLength(20, MinimumLength = 4, ErrorMessage = "Maximum 20 characters and minimum 4 characters.")]
-        public string Username { get; set; }
+        public string username { get; set; }
 
         [Display(Name = "Password")]
         [Required(ErrorMessage = " • Password is required.")]
         [StringLength(20, MinimumLength = 4, ErrorMessage = "Maximum 20 characters and minimum 6 characters.")]
-        public string Password { get; set; }
+        public string password { get; set; }
 
         [Display(Name = "Email Address")]
         [Required(ErrorMessage = " • Email is required.")]
         [EmailAddress(ErrorMessage = " • Invalid Email Address")]
-        public string Email { get; set; }
+        public string email { get; set; }
 
         [Display(Name = "Role")]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public string Role { get; set; }
+        public string role { get; set; }
 
         [Display(Name = "Full Name")]
-        [Required(ErrorMessage = " • Full name is required.")]
-        public string Full_name { get; set; }
-
-        [Display(Name = "Date of birth")]
-        [Required(ErrorMessage = " • Date of birth is required.")]
-        public DateTime Date_of_birth { get; set; }
+        public string full_name { get; set; }
 
         [Display(Name = "Phone Number (optional)")]
-        public string Phone_number { get; set; }
+        public string phone_number { get; set; }
 
         [NotMapped]
         [Display(Name = "Confirm Password")]

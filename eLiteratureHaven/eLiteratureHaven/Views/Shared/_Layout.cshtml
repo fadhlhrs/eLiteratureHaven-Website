@@ -23,6 +23,17 @@
                     <li>@Html.ActionLink("Home", "Home", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+
+                    <!--admin only-->
+                    @if (Session["username"] != null)
+                    {
+                        if (Session["role"].ToString() == "admin")
+                        {
+                            <li>@Html.ActionLink("Book List", "Admin_books", "Admin")</li>
+                            <li>@Html.ActionLink("Account List", "Admin_users", "Admin")</li>
+                            <li>@Html.ActionLink("Transaction List", "Admin_transactions", "Admin")</li>
+                        }
+                    }
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
@@ -30,24 +41,33 @@
                             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
                             </button>
                             <ul class="dropdown-menu">
+                                @if (Session["username"] != null)
+                                {
+                                    <li>
+                                        <a>Your Profile</a>
+                                    </li>
+                                    <li>
+                                        <a>Your Books</a>
+                                    </li>
+                                }
                                 <li>
-                                    <a>Your Books</a>
-                                </li>
-                                <li>
-                                    <a>Categories</a>
-                                </li>
-                                <li>
-                                    <a>Cart</a>
+                                    <a href="@Url.Action("Category", "Home")">Categories</a>
                                 </li>
                                 <li>
                                     <a>About & Contact</a>
                                 </li>
-                                <li>
-                                    <a>Your Profile</a>
-                                </li>
-                                <li>
-                                    <a href="@Url.Action("Logout", "Home")">Log out</a>
-                                </li>
+                                @if (Session["username"] != null)
+                                {
+                                    <li>
+                                        <a href="@Url.Action("Logout", "Home")">Log out</a>
+                                    </li>
+                                }
+                                @if (Session["username"] == null)
+                                {
+                                    <li>
+                                        <a href="@Url.Action("Login", "Home")">Login or Register</a>
+                                    </li>
+                                }
                             </ul>
                         </div>
                     </li>
