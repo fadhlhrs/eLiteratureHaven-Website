@@ -1,0 +1,31 @@
+﻿@Model eLiteratureHaven.books
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="~/Scripts/web/viewer.css" />
+</head>
+<body>
+    <embed 
+           src="~/Content/PDF/@(Model.pdf_path).pdf"
+           type="application/pdf"
+           width="1000px"
+           height="1000px"
+     />
+<!--
+    <script type="module" src="~/Scripts/build/pdf.mjs"></script>
+    <script type="module" src="~/Scripts/build/pdf.worker.mjs"></script>
+    <script type="module" src="~/Scripts/web/viewer.mjs"></script>
+    <script>
+        var pdfPath = "Url.Content("~/Content/PDF/" + Model.pdf_path +".pdf")";
+
+        // Load PDF into the viewer
+        pdfjsLib.getDocument(pdfPath).then(function(pdfDocument) {
+            var pdfViewer = new PDFViewer({
+                container: document.getElementById("viewer")
+            });
+            pdfViewer.setDocument(pdfDocument);
+        });
+    </script>
+-->
+</body>
+</html>
