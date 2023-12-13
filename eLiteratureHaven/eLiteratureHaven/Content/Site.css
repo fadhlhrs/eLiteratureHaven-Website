@@ -50,7 +50,7 @@ textarea {
 
 .detail-grid-container{
     display:grid;
-    grid-template: 750px / 500px 500px;
+    grid-template: 400px / 500px 500px;
     padding-top: 40px;
     padding-bottom: 40px;
 }
