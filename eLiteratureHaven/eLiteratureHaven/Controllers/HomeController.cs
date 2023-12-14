@@ -10,6 +10,7 @@ using System.Web.UI.WebControls;
 using System.Data.Entity.Validation;
 using System.Net;
 using eLiteratureHaven.Models;
+using System.Data.SqlClient;
 
 namespace eLiteratureHaven.Controllers
 {
@@ -41,26 +42,29 @@ namespace eLiteratureHaven.Controllers
 
         public ActionResult Home()
         {
-            var booksList = new List<books>();
+            var bookIds = new List<int> { 1, 3, 9, 10, 11, 12, 13, 14 };
 
-            // Create instances of different books and add them to the list
-            var book1 = new books
-            {
-                id = 1,
-                title = "Harry Potter and the Sorcerers Stone",
-                image_path = "Cover_Harry Potter and the Sorcerers Stone.jpg"
-            };
-            booksList.Add(book1);
-
-            var book2 = new books
-            {
-                id = 2,
-                title = "No Logo",
-                image_path = "Cover_No Logo.jpg"
-            };
-            booksList.Add(book2);
-
-            // Add more books as needed...
+            // Query the database to get books with the specified ids
+            var booksList = db.books
+                .Where(b => bookIds.Contains(b.id))
+                .Select(b => new // Anonymous type
+        {
+                    id = b.id,
+                    title = b.title,
+                    image_path = b.image_path,
+                    author = b.author,
+                    publication_year = b.publication_year
+                })
+                .ToList()
+                .Select(b => new books // Creating instances of the 'books' class in memory
+        {
+                    id = b.id,
+                    title = b.title,
+                    image_path = b.image_path,
+                    author = b.author,
+                    publication_year = b.publication_year
+                })
+                .ToList();
 
             // Pass the list of books to the view
             return View(booksList);
@@ -176,22 +180,131 @@ namespace eLiteratureHaven.Controllers
 
         public ActionResult Book_details(int id)
         {
+            
             var book = db.books.Find(id);
+
             if (book == null)
             {
                 return HttpNotFound();
             }
 
-            return View(book);
+            var viewModel = new book_transaction_viewmodel
+            {
+                books = book
+            };
+
+            if (Session["username"] != null)
+            {
+                string idString = (string)Session["id"];
+                int userId = Int32.Parse(idString);
+                int bookId = book.id;
+
+                // Check if the user has rented the book
+                // Your existing code...
+                string sqlQuery = "SELECT TOP 1 transaction_status FROM transactions WHERE user_id = @userId AND book_id = @bookId";
+                string transactionStatus = db.Database.SqlQuery<string>(sqlQuery,
+                    new SqlParameter("userId", userId),
+                    new SqlParameter("bookId", bookId)
+                ).FirstOrDefault();
+                // ... (rest of the code remains unchanged)
+                
+
+                string buttonText = "";
+
+                if (transactionStatus == "pending")
+                {
+                    ViewBag.TransactionStatus = "pending";
+                    buttonText = "Pending";
+                }
+                else if (transactionStatus == "processing")
+                {
+                    ViewBag.TransactionStatus = "processing";
+                    buttonText = "Processing";
+                }
+                else if (transactionStatus == "rented")
+                {
+                    ViewBag.TransactionStatus = "rented";
+                    buttonText = "Read";
+                }
+                else if (transactionStatus == "cancelled")
+                {
+                    ViewBag.TransactionStatus = "cancelled";
+                }
+                else if (transactionStatus == "due")
+                {
+                    ViewBag.TransactionStatus = "due";
+                }
+                ViewBag.ButtonText = buttonText;
+            }
+
+            return View(viewModel);
         }
-        
-        public ActionResult Payment()
+
+        [HttpPost]
+        public ActionResult Rent_process(int books_id, int user_id, transactions transaction)
         {
-            return View();
+            
+                transaction.book_id = books_id;
+                transaction.user_id = user_id;
+                db.transactions.Add(transaction);
+                db.SaveChanges();
+                return RedirectToAction("Payment", "Home", new { books_id, user_id });
+            
         }
+
+        [HttpPost]
+        public ActionResult Payment_page(int bookId, int userId)
+        {
+            transactions transaction = new transactions
+            {
+                user_id = userId,
+                book_id = bookId,
+                transaction_status = "pending"
+            };
+            db.transactions.Add(transaction);
+            db.SaveChanges();
+
+            int newTransaction = transaction.id;
+
+            return View(transaction);
+
+        }
+
+
+        public ActionResult ProcessPayment(int id, string paymentStatus)
+        {
+            try
+            {
+                var transaction = db.transactions.FirstOrDefault(t => t.id == id);
+                
+                    if (paymentStatus == "processing")
+                    {
+                        // Handle payment success logic
+                        transaction.transaction_status = "processing";
+                        transaction.payment_date = DateTime.Now;
+                    }
+                    else if (paymentStatus == "cancelled")
+                    {
+                        // Handle payment cancellation logic
+                        transaction.transaction_status = "cancelled";
+                    }
+
+                    db.SaveChanges();
+
+                    return RedirectToAction("Books_details", "Home", new { id = transaction.book_id });
+            }
+            catch (Exception ex)
+            {
+                // Log the exception for debugging purposes
+                Console.WriteLine(ex.Message);
+                return RedirectToAction("ErrorPage");
+            }
+        }
+
+
         [HttpPost]
         public ActionResult Register(users user)
-        {
+        { 
             if (ModelState.IsValid)
             {
 

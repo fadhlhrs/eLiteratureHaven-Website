@@ -1,25 +1,52 @@
-﻿@{ViewBag.Title = "Book";}
-@model eLiteratureHaven.Models.books
+﻿@{ViewBag.Title = "Book detail";}
+@model eLiteratureHaven.Models.book_transaction_viewmodel
 
 <script type="module">import pdfjsDist from 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.0.269/+esm'</script>
 <link href="~/Content/Site.css" rel="stylesheet" type="text/css" media="screen" runat="server" />
 
+
+
 <div class="detail-grid-container">
-    <div class="item1"><img src="~/Content/Cover_images/@Url.Content(Model.image_path)" style="max-width:100%;max-height:100%;" /></div>
+    <div class="item1"><img src="~/Content/Cover_images/@Url.Content(Model.books.image_path)" style="max-width:100%;max-height:100%;" /></div>
     <div class="item2" style="padding-left:50px">
-        @Model.title<br />
-        Author: @Model.author<br />
-        Published year: @Model.publication_year<br />
-        Category: @Model.category<br />
-        Genre: @Model.genre<br />
+        @Model.books.title<br />
+        Author: @Model.books.author<br />
+        Published year: @Model.books.publication_year<br />
+        Category: @Model.books.category<br />
+        Genre: @Model.books.genre<br />
 
         @if (Session["username"] == null)
-        {<text>Login to rent</text>}
+        {
+            <text>Login to rent</text>
+        }
+
         @if (Session["username"] != null)
-        {<a href="@Url.Action("PDF_viewer", "Home", new { id = Model.id })">Read</a>
+        {
+
+            string idString = (string)Session["id"];
+            int userId = Int32.Parse(idString);
+            int bookId = Model.books.id;
+
+            if (ViewBag.TransactionStatus == "rented")
+            {
+                <a href="@Url.Action("PDF_viewer", "Home", new { id = Model.books.id })">@ViewBag.ButtonText</a>
+            }
+            else if (ViewBag.TransactionStatus == "processing" || ViewBag.TransactionStatus == "pending")
+            {
+                <button type="button" disabled>@ViewBag.ButtonText</button>
+            }
+            else if (ViewBag.TransactionStatus == null || ViewBag.TransactionStatus == "cancelled" || ViewBag.TransactionStatus == "due")
+            {
+                using (Html.BeginForm("Payment_page", "Home", FormMethod.Post))
+                {
+                    @Html.Hidden("userId", userId)
+                    @Html.Hidden("bookId", bookId)
+                    <button type="submit" value="rent_book">Rent Book</button>
+                }
+            }
         }
     </div>
 </div>
 <div style="font-size: 20px;">
-    @Model.description
+    @Model.books.description
 </div>
