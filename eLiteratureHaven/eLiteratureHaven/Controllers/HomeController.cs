@@ -60,6 +60,118 @@ namespace eLiteratureHaven.Controllers
             };
             booksList.Add(book2);
 
+            var book3 = new books
+            {
+                id = 3,
+                title = "Alice in Wonderland",
+                image_path = "Cover_AliceInWonderland.jpg"
+            };
+            booksList.Add(book3);
+
+            var book4 = new books
+            {
+                id = 4,
+                title = "Freakonomics: A Rogue Economist Explores the Hidden Side of Everything",
+                image_path = "Cover_Freakonomic.jpg"
+            };
+            booksList.Add(book4);
+
+            var book5 = new books
+            {
+                id = 5,
+                title = "The Sociological Imagination",
+                image_path = "Cover_The Sociological Imagination.jpg"
+            };
+            booksList.Add(book5);
+
+            var book6 = new books
+            {
+                id = 6,
+                title = "The Lean Startup",
+                image_path = "Cover_The Lean Startup.jpg"
+            };
+            booksList.Add(book6);
+
+            var book7 = new books
+            {
+                id = 7,
+                title = "The Hobbit",
+                image_path = "Cover_The Hobbit.jpg"
+            };
+            booksList.Add(book7);
+
+            var book8 = new books
+            {
+                id = 8,
+                title = "The Lord of The Ring",
+                image_path = "Cover_The Lord of The Ring The Return of The King.jpg"
+            };
+            booksList.Add(book8);
+
+            var book9 = new books
+            {
+                id = 9,
+                title = "The Maze Runner The Kill Order",
+                image_path = "Cover_The Maze Runner The Kill Order.jpg"
+            };
+            booksList.Add(book9);
+
+            var book10 = new books
+            {
+                id = 10,
+                title = "Harry Potter and The Goblet of Fire",
+                image_path = "Cover_Harry Potter and The Goblet of Fire.jpg"
+            };
+            booksList.Add(book10);
+
+            var book11 = new books
+            {
+                id = 11,
+                title = "The Maze Runner The Death Cure",
+                image_path = "Cover_The Maze Runner The Death Cure.jpg"
+            };
+            booksList.Add(book11);
+
+            var book12 = new books
+            {
+                id = 12,
+                title = "Winnie The Pooh",
+                image_path = "Cover_Winnie The Pooh.jpg"
+            };
+            booksList.Add(book12);
+
+            var book13 = new books
+            {
+                id = 13,
+                title = "Percy Jackson and The Olypians The Lightning Thief",
+                image_path = "Cover_Percy Jackson and The Olypians The Lightning Thief.jpg"
+            };
+            booksList.Add(book13);
+
+            var book14 = new books
+            {
+                id = 14,
+                title = "Percy Jackson and The Olypians The Sea of The Monster",
+                image_path = "Cover_Percy Jackson and The Olypians The Sea of The Monster.jpg"
+            };
+            booksList.Add(book14);
+
+            var book15 = new books
+            {
+                id = 15,
+                title = "How to Write Non-Fiction",
+                image_path = "Cover_How to Write Non-Fiction.jpg"
+            };
+            booksList.Add(book15);
+
+            var book16 = new books
+            {
+                id = 16,
+                title = "Pocahontas",
+                image_path = "Cover_Pocahontas.jpg"
+            };
+            booksList.Add(book16);
+
             // Add more books as needed...
 
             // Pass the list of books to the view
