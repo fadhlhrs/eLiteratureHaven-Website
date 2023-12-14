@@ -1,0 +1,19 @@
+﻿@model eLiteratureHaven.Models.transactions
+
+@{ ViewBag.Title = "Payment"; }
+
+<h2>Scan the QR code below:</h2>
+
+
+
+@using (Html.BeginForm("ProcessPayment", "Home", FormMethod.Post))
+{
+    @Html.HiddenFor(model => model.id)
+    <button type="submit" name="paymentStatus" value="cancelled">Cancel Payment</button>
+}
+
+@using (Html.BeginForm("ProcessPayment", "Home", FormMethod.Post))
+{
+    @Html.HiddenFor(model => model.id)
+    <button type="submit" name="paymentStatus" value="processing">Mark as Paid</button>
+}
