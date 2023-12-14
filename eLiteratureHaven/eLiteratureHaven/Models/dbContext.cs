@@ -11,5 +11,7 @@ namespace eLiteratureHaven.Models
     {
         public DbSet<users> users { get; set; }
         public DbSet<books> books { get; set; }
+        public DbSet<transactions> transactions { get; set; }
+        
     }
 }

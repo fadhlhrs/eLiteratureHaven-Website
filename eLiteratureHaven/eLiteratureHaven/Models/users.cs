@@ -24,7 +24,7 @@ namespace eLiteratureHaven.Models
         public string password { get; set; }
 
         [Display(Name = "Email Address")]
-        [Required(ErrorMessage = " • Email is required.")]
+        [Required(ErrorMessage = " • Please enter your Email address")]
         [EmailAddress(ErrorMessage = " • Invalid Email Address")]
         public string email { get; set; }
 
@@ -33,6 +33,7 @@ namespace eLiteratureHaven.Models
         public string role { get; set; }
 
         [Display(Name = "Full Name")]
+        [Required(ErrorMessage = " • Please enter your full name")]
         public string full_name { get; set; }
 
         [Display(Name = "Phone Number")]
