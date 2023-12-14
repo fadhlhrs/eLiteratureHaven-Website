@@ -22,8 +22,6 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Home", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
 
                     <!--admin only-->
                     @if (Session["username"] != null)
@@ -39,7 +37,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li>
                         <div class="dropdown">
-                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" style="margin-top:7px; background-color:#282424; color:#989898">Menu
                             </button>
                             <ul class="dropdown-menu">
                                 @if (Session["username"] != null)
@@ -54,9 +52,15 @@
                                 <li>
                                     <a href="@Url.Action("Category", "Home")">Categories</a>
                                 </li>
+
                                 <li>
-                                    <a>About & Contact</a>
+                                    <a href="@Url.Action("About", "Home")">About Us</a>
                                 </li>
+
+                                <li>
+                                    <a href="@Url.Action("Contact", "Home")">Contact Us</a>
+                                </li>
+
                                 @if (Session["username"] != null)
                                 {
                                     <li>
