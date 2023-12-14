@@ -1,17 +1,62 @@
-﻿
-@{
-    Layout = null;
-}
+﻿@{ViewBag.Title = "Transaction list";}
+@model IEnumerable<eLiteratureHaven.Models.transactions>
 
 <!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Admin_transactions</title>
-</head>
-<body>
-    <div> 
-    </div>
-</body>
-</html>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.book_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.user_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.create_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.payment_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.due_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.transaction_status)
+        </th>
+        <th>
+            Edit Status
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(model => item.id)
+        </td>
+        <td>
+            @Html.DisplayFor(model => item.book_id)
+        </td>
+        <td>
+            @Html.DisplayFor(model => item.user_id)
+        </td>
+        <td>
+            @Html.DisplayFor(model => item.create_date)
+        </td>
+        <td>
+            @Html.DisplayFor(model => item.payment_date)
+        </td>
+        <td>
+            @Html.DisplayFor(model => item.due_date)
+        </td>
+        <td>
+            @Html.DisplayFor(model => item.transaction_status)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit_transaction", new { id = item.id })
+        </td>
+    </tr>
+    }
+</table>

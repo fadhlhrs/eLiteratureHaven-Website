@@ -8,6 +8,7 @@ using eLiteratureHaven.Models;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
+using System.Data.SqlClient;
 
 
 namespace eLiteratureHaven.Controllers
@@ -38,10 +39,6 @@ namespace eLiteratureHaven.Controllers
                 return View(db.users.ToList());
             }
             return RedirectToAction("Login", "Home");
-        }
-        public ActionResult Admin_transactions()
-        {
-            return View();
         }
 
         public ActionResult Add_book()
@@ -146,6 +143,43 @@ namespace eLiteratureHaven.Controllers
             return View();
         }
 
+        public ActionResult Admin_transactions()
+        {
+            if (Session["role"].ToString() == "admin")
+            {
+                return View(db.transactions.ToList());
+            }
+            return RedirectToAction("Login", "Home");
+
+        }
+
+        public ActionResult Edit_transaction(int id)
+        {
+            var transaction = db.transactions.Find(id);
+            if (transaction == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(transaction);
+        }
+
+        [HttpPost]
+        public ActionResult Edit_transaction([Bind(Include = "id, due_date, transaction_status")]transactions transaction)
+        {
+            if (transaction.transaction_status == "rented")
+            {
+                string sql = "UPDATE transactions SET transaction_status = @transaction_status, due_date = DATEADD(day, 7, GETDATE()) WHERE id = @id";
+                db.Database.ExecuteSqlCommand(sql, new SqlParameter("@stransaction_statustatus", "rented"), new SqlParameter("@id", transaction.id));
+            }
+            else
+            {
+                string sql = "UPDATE transactions SET transaction_status = @transaction_status WHERE id = @id";
+                db.Database.ExecuteSqlCommand(sql, new SqlParameter("@transaction_status", transaction.transaction_status), new SqlParameter("@id", transaction.id));
+            }
+
+            return RedirectToAction("Admin_transactions");
+        }
 
     }
 }
