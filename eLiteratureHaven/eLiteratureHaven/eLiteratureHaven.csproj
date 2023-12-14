@@ -210,7 +210,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\books.cs" />
+    <Compile Include="Models\book_transaction_viewmodel.cs" />
     <Compile Include="Models\dbContext.cs" />
+    <Compile Include="Models\transactions.cs" />
     <Compile Include="Models\users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -644,11 +646,12 @@
     <Content Include="Views\Admin\Admin_users.cshtml" />
     <Content Include="Views\Home\Search_result.cshtml" />
     <Content Include="Views\Home\Category_result.cshtml" />
-    <Content Include="Views\Home\Payment.cshtml" />
+    <Content Include="Views\Home\Payment_page.cshtml" />
     <Content Include="Views\Admin\Admin_transactions.cshtml" />
     <Content Include="Views\Admin\Delete_book.cshtml" />
     <Content Include="Views\Admin\Edit_book.cshtml" />
     <Content Include="Views\Home\PDF_viewer.cshtml" />
+    <Content Include="Views\Admin\Edit_transaction.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
