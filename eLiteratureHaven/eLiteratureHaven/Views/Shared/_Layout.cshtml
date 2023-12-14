@@ -1,6 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" media="screen" runat="server" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - eLiteratureHaven</title>
@@ -44,7 +45,7 @@
                                 @if (Session["username"] != null)
                                 {
                                     <li>
-                                        <a>Your Profile</a>
+                                        <a href="@Url.Action("User_page", "Home")">Your Profile</a>
                                     </li>
                                     <li>
                                         <a>Your Books</a>

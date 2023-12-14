@@ -50,7 +50,7 @@ textarea {
 
 .detail-grid-container{
     display:grid;
-    grid-template: 750px / 500px 500px;
+    grid-template: 400px / 500px 500px;
     padding-top: 40px;
     padding-bottom: 40px;
 }
@@ -60,13 +60,14 @@ textarea {
     font-size: 20px;
 }
 
-.user-grid-container{
-    display:grid;
-    grid-template: 750px / 100px 300px 300px;
+.user-grid-container {
+    display: grid;
+    grid-template: 500px / 500px 500px;
+    grid-gap: 100px;
     padding-top: 40px;
     padding-bottom: 40px;
-    justify-content:center;
-    margin:20px;
+    justify-content: center;
+    margin: 20px;
 }
 
     .user-grid-container > div {

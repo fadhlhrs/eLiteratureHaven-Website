@@ -5,7 +5,10 @@ using System.Data;
 using System.Data.Entity;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 using System.Data.Entity.Validation;
+using System.Net;
 using eLiteratureHaven.Models;
 
 namespace eLiteratureHaven.Controllers
@@ -156,11 +159,30 @@ namespace eLiteratureHaven.Controllers
 
         public ActionResult User_page()
         {
-            return View();
+            string sessionId = (string)Session["id"];
+            int id;
+
+            if (int.TryParse(sessionId, out id))
+            {
+                var user = db.users.FirstOrDefault(u => u.id == id);
+                if (user != null)
+                {
+                    return View(user);
+                }
+            }
+
+            return RedirectToAction("Home", "Home");
         }
-        public ActionResult Book_details()
+
+        public ActionResult Book_details(int id)
         {
-            return View();
+            var book = db.books.Find(id);
+            if (book == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(book);
         }
         
         public ActionResult Payment()
@@ -172,6 +194,7 @@ namespace eLiteratureHaven.Controllers
         {
             if (ModelState.IsValid)
             {
+
 
                 var obj = db.users.Where(a => a.username.Equals(user.username)).FirstOrDefault();
                 if (obj != null)
@@ -189,6 +212,29 @@ namespace eLiteratureHaven.Controllers
             }
             return View();
         }
+
+        public ActionResult PDF_viewer(int id)
+         {
+            string sessionId = (string)Session["id"];
+            // Set SameSite=None; Secure for cross-site cookies sent from HTTPS pages
+            HttpCookie myCookie = new HttpCookie(sessionId, sessionId);
+
+            // Set SameSite=None; Secure for cross-site cookies sent from HTTPS pages
+            myCookie.Secure = true; // Make sure to set this if your site is served over HTTPS
+
+            // Manually set the SameSite attribute using Set-Cookie header
+            Response.AppendHeader("Set-Cookie", $"{myCookie.Name}={myCookie.Value}; SameSite=None; Secure");
+
+
+            var book = db.books.Find(id);
+             if (book == null)
+             {
+                 return HttpNotFound();
+             }
+
+             return View(book);
+         }
+
         public ActionResult Logout()
         {
             Session.Remove("username");

@@ -22,23 +22,24 @@
             {
             <tr>
                 <td>
-                    @if (!string.IsNullOrEmpty(filteredBooks.image_path))
-                    {
-                        <img src="@Url.Content("~/Content/Cover_images/" + filteredBooks.image_path)" style="max-height:200px;" />
-                    }
-                    else
-                    {
-                        <span>No Image</span>
-                    }
+                    <a href="@Url.Action("Book_details", "Home", new { id = filteredBooks.id })">
+                        <img src="/Content/Cover_images/@Url.Content(filteredBooks.image_path)" style="max-height:200px;" />
+                    </a>
                 </td>
                 <td>
-                    @filteredBooks.title
+                    <a href="@Url.Action("Book_details", "Home", new { id = filteredBooks.id })">
+                        @filteredBooks.title
+                    </a>
                 </td>
                 <td>
-                    @filteredBooks.author
+                    <a href="@Url.Action("Book_details", "Home", new { id = filteredBooks.id })">
+                        @filteredBooks.author
+                    </a>
                 </td>
                 <td>
-                    @filteredBooks.publication_year
+                    <a href="@Url.Action("Book_details", "Home", new { id = filteredBooks.id })">
+                        @filteredBooks.publication_year
+                    </a>
                 </td>
             </tr>
         }

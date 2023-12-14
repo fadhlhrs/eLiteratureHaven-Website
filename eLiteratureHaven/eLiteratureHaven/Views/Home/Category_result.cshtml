@@ -4,38 +4,46 @@
 
 @if (Model != null && Model.Any())
 {
-        <table class="table">
-            <tr>
-                <th>
-                    Book Cover
-                </th>
-                <th>
-                    Book Title
-                </th>
-                <th>
-                    Author
-                </th>
-                <th>
-                    Published Year
-                </th>
-                @foreach (var filteredBooks in Model)
-                {
-            <tr>
-                <td>
+<table class="table">
+    <tr>
+        <th>
+            Book Cover
+        </th>
+        <th>
+            Book Title
+        </th>
+        <th>
+            Author
+        </th>
+        <th>
+            Published Year
+        </th>
+        @foreach (var filteredBooks in Model)
+        {
+        <tr>
+            <td>
+                <a href="@Url.Action("Book_details", "Home", new { id = filteredBooks.id })">
                     <img src="/Content/Cover_images/@Url.Content(filteredBooks.image_path)" style="max-height:200px;" />
-                </td>
-                <td>
+                </a>
+            </td>
+            <td>
+                <a href="@Url.Action("Book_details", "Home", new { id = filteredBooks.id })">
                     @filteredBooks.title
-                </td>
-                <td>
+                </a>
+            </td>
+            <td>
+                <a href="@Url.Action("Book_details", "Home", new { id = filteredBooks.id })">
                     @filteredBooks.author
-                </td>
-                <td>
+                </a>
+            </td>
+            <td>
+                <a href="@Url.Action("Book_details", "Home", new { id = filteredBooks.id })">
                     @filteredBooks.publication_year
-                </td>
-            </tr>
-                }
-        </table>
+                </a>
+            </td>
+        </tr>
+    }
+    </table>
 }
 else
 { 
