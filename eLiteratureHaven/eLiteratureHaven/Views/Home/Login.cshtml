@@ -9,7 +9,7 @@
 
 @using (Html.BeginForm("Login", "Home", FormMethod.Post))
 {
-    <body style="background-color: lightblue;">
+    <body style="background-color: #989898;">
         <fieldset>
 
 
@@ -17,13 +17,13 @@
             @Html.Raw(TempData["msg"])
             @Html.ValidationSummary(true)
 
-            <div style="left:50%; top:50%; transform: translate(-50%, -50%);box-shadow: 5px 10px #888888; border-radius: 25px; position:absolute; padding: 20px; background-color: white;">
+            <div style="left:50%; top:50%; transform: translate(-50%, -50%);box-shadow: 5px 10px #888888; border-radius: 25px; position:absolute; padding: 20px; background-color: #212121; color:white">
                 <h3 style="text-align: center; margin: -5px">Login</h3>
                 <hr />
-                <table style="margin-left: auto; margin-right: auto;">
+                <table style="margin-left: auto; margin-right: auto; color:white">
                     <tr>
-                        <td>@Html.LabelFor(a => a.username)</td>
-                        <td>@Html.TextBoxFor(a => a.username)</td>
+                        <td>@Html.LabelFor(a => a.username)&nbsp;&nbsp;</td>
+                        <td>@Html.TextBoxFor(a => a.username)&nbsp;&nbsp;</td>
                         <td>@Html.ValidationMessageFor(a => a.username, "", new { @class = "text-danger" })</td>
                     </tr>
                     <tr>
@@ -40,8 +40,8 @@
                     <tr></tr>
                     <tr>
                         <td></td>
-                        <td style="padding-top : 20px">
-                            <input type="submit" value="Login" />
+                        <td style="padding-top : 20px; justify-content:space-between">
+                            <input type="submit" value="Login" /><span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
                             <a href="@Url.Action("Register", "Home")" class="elements">
                                 <span>Register</span>
                             </a>
