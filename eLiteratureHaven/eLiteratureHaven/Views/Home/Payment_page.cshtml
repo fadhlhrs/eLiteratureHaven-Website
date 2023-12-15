@@ -2,18 +2,56 @@
 
 @{ ViewBag.Title = "Payment"; }
 
-<h2>Scan the QR code below:</h2>
+<style>
+    .payment-container {
+        text-align: center;
+        margin-top: 20px;
+        position: relative;
+    }
 
+    .qr-code {
+        max-width: 75%;
+        max-height:500px;
+        margin-bottom: 20px;
+    }
 
+    .payment-buttons {
+        display: flex;
+        justify-content: space-between;
+        position: absolute;
+        margin-top: 40px;
+        width: 100%;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 10px; /* Adjust padding as needed */
+    }
 
-@using (Html.BeginForm("ProcessPayment", "Home", FormMethod.Post))
-{
-    @Html.HiddenFor(model => model.id)
-    <button type="submit" name="paymentStatus" value="cancelled">Cancel Payment</button>
-}
+        .payment-buttons button {
+            flex: 1;
+            margin: 0 10px;
+        }
+</style>
 
-@using (Html.BeginForm("ProcessPayment", "Home", FormMethod.Post))
-{
-    @Html.HiddenFor(model => model.id)
-    <button type="submit" name="paymentStatus" value="processing">Mark as Paid</button>
-}
+<div class="payment-container">
+    <h4>We only ask for 1RM :)</h4>
+    <h2>Scan the QR code below to pay</h2>
+
+    <img src="~/Content/QR code/MAE_QR_20231215_183404.png" alt="QR Code" class="qr-code">
+
+    <div class="payment-buttons">
+        @using (Html.BeginForm("ProcessPayment", "Home", FormMethod.Post))
+        {
+            @Html.HiddenFor(model => model.id)
+            @Html.HiddenFor(model => model.book_id)
+            <button type="submit" name="paymentStatus" value="cancelled">Cancel payment</button>
+        }
+
+        @using (Html.BeginForm("ProcessPayment", "Home", FormMethod.Post))
+        {
+            @Html.HiddenFor(model => model.id)
+            @Html.HiddenFor(model => model.book_id)
+            <button type="submit" name="paymentStatus" value="processing">I already paid</button>
+        }
+    </div>
+</div>
