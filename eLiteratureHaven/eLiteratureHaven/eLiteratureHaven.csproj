@@ -224,6 +224,7 @@
     <Content Include="Content\Cover_images\Cover_Harry Potter and the Sorcerers Stone.jpg" />
     <Content Include="Content\Cover_images\Cover_No Logo.jpg" />
     <Content Include="Content\Cover_images\Untitled.png" />
+    <Content Include="Content\QR code\MAE_QR_20231215_183404.png" />
     <Content Include="Scripts\build\pdf.mjs" />
     <Content Include="Scripts\build\pdf.sandbox.mjs" />
     <Content Include="Scripts\build\pdf.worker.mjs" />
@@ -652,6 +653,7 @@
     <Content Include="Views\Admin\Edit_book.cshtml" />
     <Content Include="Views\Home\PDF_viewer.cshtml" />
     <Content Include="Views\Admin\Edit_transaction.cshtml" />
+    <Content Include="Views\Home\your_books.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -682,7 +684,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>61199</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:61199/</IISUrl>
+          <IISUrl>http://localhost:15225/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
