@@ -6,18 +6,19 @@
 
 
 
+
 <div class="detail-grid-container">
     <div class="item1"><img src="~/Content/Cover_images/@Url.Content(Model.books.image_path)" style="max-width:100%;max-height:100%;" /></div>
     <div class="item2" style="padding-left:50px">
-        @Model.books.title<br />
-        Author: @Model.books.author<br />
-        Published year: @Model.books.publication_year<br />
-        Category: @Model.books.category<br />
-        Genre: @Model.books.genre<br />
+        <h3>@Model.books.title</h3><br />
+        <label style="display:inline-block; width:150px;">Author</label>:&nbsp;&nbsp;@Model.books.author<br />
+        <label style="display:inline-block; width:150px;">Published year</label>:&nbsp;&nbsp;@Model.books.publication_year<br />
+        <label style="display:inline-block; width:150px;">Category</label>:&nbsp;&nbsp;@Model.books.category<br />
+        <label style="display:inline-block; width:150px;">Genre</label>:&nbsp;&nbsp;@Model.books.genre<br />
 
         @if (Session["username"] == null)
         {
-            <text>Login to rent</text>
+            <br /><text>Login to rent</text>
         }
 
         @if (Session["username"] != null)
@@ -29,11 +30,11 @@
 
             if (ViewBag.TransactionStatus == "rented")
             {
-                <a href="@Url.Action("PDF_viewer", "Home", new { id = Model.books.id })">@ViewBag.ButtonText</a>
+                <br /><button href="@Url.Action("PDF_viewer", "Home", new { id = Model.books.id })">@ViewBag.ButtonText</button>
             }
             else if (ViewBag.TransactionStatus == "processing" || ViewBag.TransactionStatus == "pending")
             {
-                <button type="button" disabled>@ViewBag.ButtonText</button>
+                <br /><button type="button" disabled>@ViewBag.ButtonText</button>
             }
             else if (ViewBag.TransactionStatus == null || ViewBag.TransactionStatus == "cancelled" || ViewBag.TransactionStatus == "due")
             {
@@ -41,7 +42,7 @@
                 {
                     @Html.Hidden("userId", userId)
                     @Html.Hidden("bookId", bookId)
-                    <button type="submit" value="rent_book">Rent Book</button>
+                    <br /><button type="submit" value="rent_book">Rent Book</button>
                 }
             }
         }

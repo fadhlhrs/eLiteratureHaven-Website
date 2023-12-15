@@ -1,10 +1,7 @@
-﻿
-
-@{ViewBag.Title = "Home Page";}
+﻿@{ViewBag.Title = "Home Page";}
 
 <link href="~/Content/Site.css" rel="stylesheet" type="text/css" media="screen" runat="server" />
 <title>Home</title>
-
 
 <div style="display: flex; justify-content: space-between;">
 
@@ -20,13 +17,13 @@
         <h3 style="margin-top: 50px;">Rent any book for just 1 RM!!</h3>
     </div>
 
-    <div style="width: 45%; text-align: right; margin-top: 50px;">
+    <div style="width: 45%; text-align: right; margin-top: 50px; margin-left: auto;">
         <h4>Search a book</h4>
         <div>
             @using (Html.BeginForm("Home", "Home", FormMethod.Post))
             {
                 @Html.Raw(TempData["msg"])
-                <input class="home-search-box" style="margin-right: 0px;" type="text" size="500" name="home_search" placeholder="Enter a title or author" />
+                <input class="home-search-box" style="text-align: left; width: 100%; margin-left: 232px;" type="text" name="home_search" placeholder="Enter a title or author" />
             }
         </div>
     </div>
