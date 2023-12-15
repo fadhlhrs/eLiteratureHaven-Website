@@ -40,6 +40,11 @@
                             <td>@Html.ValidationMessageFor(a => a.full_name, "", new { @class = "text-danger" })</td>
                         </tr>
                         <tr>
+                            <td>@Html.LabelFor(a => a.phone_number)</td>
+                            <td>@Html.TextBoxFor(a => a.phone_number)</td>
+                            <td>@Html.ValidationMessageFor(a => a.phone_number, "", new { @class = "text-danger" })</td>
+                        </tr>
+                        <tr>
                             <td>
                                 @Html.LabelFor(a => a.password)
                             </td>
