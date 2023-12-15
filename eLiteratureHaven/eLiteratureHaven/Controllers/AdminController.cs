@@ -147,7 +147,8 @@ namespace eLiteratureHaven.Controllers
         {
             if (Session["role"].ToString() == "admin")
             {
-                return View(db.transactions.ToList());
+                var sortedTransactions = db.transactions.OrderByDescending(t => t.create_date).ToList();
+                return View(sortedTransactions);
             }
             return RedirectToAction("Login", "Home");
 
@@ -169,8 +170,8 @@ namespace eLiteratureHaven.Controllers
         {
             if (transaction.transaction_status == "rented")
             {
-                string sql = "UPDATE transactions SET transaction_status = @transaction_status, due_date = DATEADD(day, 7, GETDATE()) WHERE id = @id";
-                db.Database.ExecuteSqlCommand(sql, new SqlParameter("@stransaction_statustatus", "rented"), new SqlParameter("@id", transaction.id));
+                string sql = "UPDATE transactions SET transaction_status = @transaction.transaction_status, due_date = DATEADD(day, 7, GETDATE()) WHERE id = @id";
+                db.Database.ExecuteSqlCommand(sql, new SqlParameter("@transaction_status", "rented"), new SqlParameter("@id", transaction.id));
             }
             else
             {
