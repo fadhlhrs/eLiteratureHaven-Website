@@ -1,0 +1,55 @@
+﻿@model System.Data.DataTable
+@using System.Data
+
+<!DOCTYPE html>
+
+<h2>Your Books</h2>
+
+<table class="table">
+    <tr>
+        <th>Cover Image</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Publication Year</th>
+        <th>Category</th>
+        <th>Genre</th>
+        <th>Status</th>
+    </tr>
+    @foreach (DataRow row in Model.Rows)
+    {
+    <tr>
+
+        <td>
+            <a href="@Url.Action("Book_details", "Home", new { id = row["book_id"] })">
+                <img src="/Content/Cover_images/@row["image_path"]" style="max-height:200px;" />
+            </a>
+        </td>
+        <td>
+            <a href="@Url.Action("Book_details", "Home", new { id = row["book_id"] })">
+                @row["title"]
+            </a>
+        </td>
+        <td>
+                @row["author"]
+        </td>
+        <td>
+            @row["publication_year"]
+        <td>
+                @row["category"]
+        </td>
+        <td>
+                @row["genre"]
+        </td>
+        <td>
+            @if (row["transaction_status"].ToString() == "rented")
+            {
+                <a href="@Url.Action("PDF_viewer", "Home", new { id = row["book_id"] })">Read</a>
+            }
+            else
+            {
+                @row["transaction_status"]
+            }
+        </td>
+    </tr>
+    }
+</table>

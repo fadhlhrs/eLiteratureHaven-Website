@@ -201,7 +201,7 @@ namespace eLiteratureHaven.Controllers
 
                 // Check if the user has rented the book
                 // Your existing code...
-                string sqlQuery = "SELECT TOP 1 transaction_status FROM transactions WHERE user_id = @userId AND book_id = @bookId";
+                string sqlQuery = "SELECT TOP 1 transaction_status FROM transactions WHERE user_id = @userId AND book_id = @bookId ORDER BY create_date DESC";
                 string transactionStatus = db.Database.SqlQuery<string>(sqlQuery,
                     new SqlParameter("userId", userId),
                     new SqlParameter("bookId", bookId)
@@ -271,7 +271,7 @@ namespace eLiteratureHaven.Controllers
         }
 
 
-        public ActionResult ProcessPayment(int id, string paymentStatus)
+        public ActionResult ProcessPayment(int id, string paymentStatus, int book_id)
         {
             try
             {
@@ -288,10 +288,10 @@ namespace eLiteratureHaven.Controllers
                         // Handle payment cancellation logic
                         transaction.transaction_status = "cancelled";
                     }
-
+                     
                     db.SaveChanges();
 
-                    return RedirectToAction("Books_details", "Home", new { id = transaction.book_id });
+                    return RedirectToAction("Book_details", "Home", new { id = transaction.book_id });
             }
             catch (Exception ex)
             {
@@ -356,6 +356,73 @@ namespace eLiteratureHaven.Controllers
 
             return RedirectToAction("login");
         }
+
+        public ActionResult your_books()
+        {
+            int user_id = Convert.ToInt32(Session["id"]);
+
+            DataTable dataTable = GetDataFromDatabase(user_id);
+
+            return View(dataTable);
+        }
+
+        private DataTable GetDataFromDatabase(int user_id)
+        {
+            DataTable dataTable = new DataTable();
+
+            using (SqlConnection connection = new SqlConnection(@"Data Source=DRAGONFLY\SQLEXPRESS;Initial Catalog=eLiteratureHaven;Integrated Security=True;"))
+            {
+                connection.Open();
+
+                string query = @"
+            WITH RankedTransactions AS (
+                SELECT
+                    transactions.book_id,
+                    transactions.user_id,
+                    books.image_path,
+                    books.title,
+                    books.author,
+                    books.publication_year,
+                    books.category,
+                    books.genre,
+                    transactions.transaction_status,
+                    ROW_NUMBER() OVER (PARTITION BY transactions.book_id, transactions.user_id ORDER BY transactions.create_date DESC) AS RowNum
+                FROM
+                    transactions
+                    INNER JOIN books ON transactions.book_id = books.id
+                WHERE
+                    transactions.user_id = @UserId
+                    AND transactions.transaction_status <> 'cancelled'
+            )
+            SELECT
+                book_id,
+                user_id,
+                image_path,
+                title,
+                author,
+                publication_year,
+                category,
+                genre,
+                transaction_status
+            FROM
+                RankedTransactions
+            WHERE
+                RowNum = 1";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@UserId", user_id);
+
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                    {
+                        adapter.Fill(dataTable);
+                    }
+                }
+            }
+
+            return dataTable;
+        }
+
 
     }
 }
