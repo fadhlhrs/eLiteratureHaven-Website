@@ -170,7 +170,7 @@ namespace eLiteratureHaven.Controllers
         {
             if (transaction.transaction_status == "rented")
             {
-                string sql = "UPDATE transactions SET transaction_status = @transaction.transaction_status, due_date = DATEADD(day, 7, GETDATE()) WHERE id = @id";
+                string sql = "UPDATE transactions SET transaction_status = @transaction_status, due_date = DATEADD(day, 7, GETDATE()) WHERE id = @id";
                 db.Database.ExecuteSqlCommand(sql, new SqlParameter("@transaction_status", "rented"), new SqlParameter("@id", transaction.id));
             }
             else
